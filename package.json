@@ -1,0 +1,27 @@
+{
+  "name": "todo-serverless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "start": "sls offline",
+    "live": "nodemon --exec \"npm start\" -e \"ts js yml json\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.59",
+    "@types/node": "^14.0.27",
+    "nodemon": "^2.0.4",
+    "serverless-offline": "^6.5.0",
+    "serverless-plugin-typescript": "1.1.7",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.25"
+  }
+}

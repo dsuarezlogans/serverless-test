@@ -1,0 +1,31 @@
+# To run, `docker-compose up -d && docker-compose logs`
+version: "3"
+services:
+  slstestsvc:
+    build: .
+    # Place local environment variables into a `.env` file
+    #env_file: .env
+    # environment:
+    #   - REDIS_HOSTNAME=redisStore
+    #   - REDIS_PORT=6379
+    #   - REDIS_PASSWORD=test
+    image: dsuarez/slstest
+    container_name: slstest
+    # volumes:
+    #   - .:/usr/src/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+  db:
+    image: mariadb
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

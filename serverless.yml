@@ -1,0 +1,59 @@
+service: todo-serverless
+provider:
+  name: aws
+  runtime: nodejs12.x
+  timeout: 20
+  # you can overwrite defaults here
+  #  stage: dev
+  region: us-east-2
+
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
+
+# you can add packaging information here
+#package:
+#  include:
+#    - include-me.js
+#    - include-me-dir/**
+#  exclude:
+#    - exclude-me.js
+#    - exclude-me-dir/**
+
+functions:
+  hello:
+    handler: src/handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
+          integration: lambda
+          authorizer: auth
+          # request:
+          #   template:
+          #     application/json: '{ "foo" : "$input.params(''bar'')", "body" : "$input.body(''$'')" }'
+  bye:
+    handler: src/handler.bye
+    events:
+      - http:
+          path: bye
+          method: get
+          integration: lambda
+          authorizer: auth
+          # request:
+          #   template:
+          #     application/json: '{ "foo" : "$input.params(''bar'')", "body" : "$input.body(''$'')" }'
+  auth:
+    handler: src/auth.authorizer
+#    Define function environment variables here
+#    environment:
+#      variable2: value2
+# package:
+#   include:
+#     - ormconfig.js
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+custom:
+  serverless-offline:
+    host: 0.0.0.0
